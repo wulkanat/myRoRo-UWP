@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="myRoRo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:myRoRo"
+    xmlns:data="using:myRoRo"
+    mc:Ignorable="d">
+    <!--="{ThemeResource SystemControlDisabledBaseLowBrush}">-->
+
+    <Grid>
+        <Pivot Name="pivot1" Title="" ItemsSource="{Binding schedules}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="data:Schedule">
+                    <TextBlock Text="{Binding DayName}"></TextBlock>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="data:Schedule">
+                    <ListView ItemsSource="{Binding ScheduleEntries}" IsItemClickEnabled="False" SelectionMode="None" HorizontalAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:ScheduleEntry">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <TextBlock Text="{Binding ClassName}" HorizontalAlignment="Left" FontWeight="SemiBold" VerticalAlignment="Stretch"></TextBlock>
+                                    <TextBlock Text="{Binding Entries }" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+
+        <ProgressRing Name="LoadingProcessProgressRing" Width="50" Height="50" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Page>
